@@ -14,10 +14,6 @@ body {
     width:650px;
     height:650px;
     display: grid;
-    /* grid-template-columns: repeat(15,1fr); */
-    /* grid-template-rows: repeat(15,1fr); */
-    /* gap:1px; */
-    /* border:1px solid black; */
     background-color: coral;
 }
 
