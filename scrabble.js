@@ -71,5 +71,13 @@ function getLetters(amount) {
     }
 }
 
-getLetters(10);
+getLetters(7);
 console.log(letters);
+
+const PIECES = document.createElement('div');
+PIECES.classList.add('pieces')
+for (let i = 0; i < 7; ++i) {
+    const piece = document.createElement('div');
+    piece.classList.add('piece');
+    PIECES.appendChild(piece);
+}

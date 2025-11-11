@@ -8,6 +8,7 @@ body {
     display: grid;
     align-items: center;
     justify-items: center;
+    background-color: rgb(233, 217, 207);
 }
 
 .board {
