@@ -57,6 +57,19 @@ function createBag(frequencies) {
 }
 
 let letters = createBag(LETTER_FREQUENCIES);
-const BAG = document.createElement('p');
-BAG.innerText = letters;
-document.body.appendChild(BAG);
+// const BAG = document.createElement('p');
+// BAG.innerText = letters;
+// document.body.appendChild(BAG);
+
+function getLetters(amount) {
+    for (let i = 0; i < amount; i++) {
+        letterindex = Math.floor(Math.random() * letters.length);
+        let letter = letters[letterindex];
+        letters.splice(letterindex, 1);
+        console.log(letter);
+        // return letter;
+    }
+}
+
+getLetters(10);
+console.log(letters);
