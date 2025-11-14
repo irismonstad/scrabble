@@ -22,16 +22,24 @@ body {
     border:1px solid black;
 }
 
-.pieces {
+.piecearea {
     display: grid;
     border:1px solid red;
     width:400px;
     height:50px;
 }
 
+.pieceareaind {
+    border:1px solid black;
+    
+}
+
 .piece {
     border:1px solid black;
+    height:100%;
+    width:100%;
     text-align: center;
     align-content: center;
     font-size: 2em;
+    /* position: absolute; */
 }

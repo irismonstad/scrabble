@@ -7,6 +7,8 @@ let height = 15;
 for (let i = 0; i < width*height; ++i) {
     const field = document.createElement('div');
     field.classList.add('field');
+    field.addEventListener("drop", dropHandler);
+    field.addEventListener("dragover", dragoverHandler);
     BOARD.appendChild(field);
 }
 
@@ -65,32 +67,49 @@ function getLetters(amount) {
         letterindex = Math.floor(Math.random() * letters.length);
         let letter = letters[letterindex];
         letters.splice(letterindex, 1);
-        // console.log(letter);
         return letter;
     }
 }
 
-// getLetters(7);
-// console.log(letters);
-
-const PIECES = document.createElement('div');
-PIECES.classList.add('pieces')
+const PIECEAREA = document.createElement('div');
+PIECEAREA.classList.add('piecearea')
 for (let i = 0; i < 7; ++i) {
-    const piece = document.createElement('div');
-    piece.classList.add('piece');
-    PIECES.appendChild(piece);
+    const pieceAreaInd = document.createElement('div');
+    pieceAreaInd.classList.add('pieceareaInd');
+    PIECEAREA.appendChild(pieceAreaInd);
 }
 
-PIECES.style.gridTemplateColumns = `repeat(7,1fr)`
-document.body.appendChild(PIECES)
+PIECEAREA.style.gridTemplateColumns = `repeat(7,1fr)`;
+document.body.appendChild(PIECEAREA);
 
 
-// https://www.reddit.com/r/learnjavascript/comments/vo30qx/how_can_i_iterate_over_nested_divs_and_set/
+// https://www.reddit.com/r/learnjavascript/comments/vo30qx/how_can_i_iterate_over_nested_divs_and_set/ loosely inspired by
 
-let pieceDivs = document.querySelectorAll('.pieces .piece')
+let pieceDivs = document.querySelectorAll('.piecearea .pieceareaInd');
 
-pieceDivs.forEach((piece) => {
-  const content = document.createElement('div')
+let index = 0;
+pieceDivs.forEach((pieceareaInd) => {
+  const content = document.createElement('div');
   content.append(document.createTextNode(getLetters(1)))
-  piece.appendChild(content)
+  content.classList.add('piece');
+  content.setAttribute("draggable", "true");
+  content.addEventListener("dragstart", dragstartHandler);
+  content.id = "piece-" + index;
+  pieceareaInd.appendChild(content);
+  index++;
 });
+
+// https://www.w3schools.com/html/html5_draganddrop.asp
+function dragstartHandler(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function dragoverHandler(ev) {
+  ev.preventDefault();
+}
+
+function dropHandler(ev) {
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
