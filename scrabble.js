@@ -1,3 +1,4 @@
+// CREATE BOARD FOR THE GAME (https://github.com/hausnes/webutvikling/blob/main/eksempel/js/piksel-eksperiment/piksels.js)
 const BOARD = document.createElement('div');
 BOARD.classList.add('board')
 
@@ -17,8 +18,7 @@ BOARD.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
 document.body.appendChild(BOARD);
 
-// basic structure for creating board from https://github.com/hausnes/webutvikling/blob/main/eksempel/js/piksel-eksperiment/piksels.js
-
+// CREATE THE LETTERS
 const LETTER_FREQUENCIES = {
     A: 9,
     B: 2,
@@ -71,11 +71,14 @@ function getLetters(amount) {
     }
 }
 
+// CREATE THE PIECES
 const PIECEAREA = document.createElement('div');
 PIECEAREA.classList.add('piecearea')
 for (let i = 0; i < 7; ++i) {
     const pieceAreaInd = document.createElement('div');
     pieceAreaInd.classList.add('pieceareaInd');
+    pieceAreaInd.addEventListener("drop", dropHandler);
+    pieceAreaInd.addEventListener("dragover", dragoverHandler);
     PIECEAREA.appendChild(pieceAreaInd);
 }
 
@@ -99,7 +102,7 @@ pieceDivs.forEach((pieceareaInd) => {
   index++;
 });
 
-// https://www.w3schools.com/html/html5_draganddrop.asp
+// MAKE PIECES DRAGGABLE (https://www.w3schools.com/html/html5_draganddrop.asp)
 function dragstartHandler(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
 }
