@@ -15,7 +15,7 @@ BOARD.style.gridTemplateRows = `repeat(${height}, 1fr)`;
 
 document.body.appendChild(BOARD);
 
-// grunnleggede struktur for å opprette rutenett hentet fra https://github.com/hausnes/webutvikling/blob/main/eksempel/js/piksel-eksperiment/piksels.js
+// basic structure for creating board from https://github.com/hausnes/webutvikling/blob/main/eksempel/js/piksel-eksperiment/piksels.js
 
 const LETTER_FREQUENCIES = {
     A: 9,
@@ -46,6 +46,7 @@ const LETTER_FREQUENCIES = {
     Z: 1,
 }
 
+// Function that creates a "bag" of letters. Takes parameter letter frequency (how many As, Bs etc.)
 function createBag(frequencies) {
     const bag = [];
     for (const [letter, frequency] of Object.entries(frequencies)) {
@@ -57,22 +58,20 @@ function createBag(frequencies) {
 }
 
 let letters = createBag(LETTER_FREQUENCIES);
-// const BAG = document.createElement('p');
-// BAG.innerText = letters;
-// document.body.appendChild(BAG);
 
+// Randomly selects an amount of letters from the bag, removes them from bag. 
 function getLetters(amount) {
     for (let i = 0; i < amount; i++) {
         letterindex = Math.floor(Math.random() * letters.length);
         let letter = letters[letterindex];
         letters.splice(letterindex, 1);
-        console.log(letter);
-        // return letter;
+        // console.log(letter);
+        return letter;
     }
 }
 
-getLetters(7);
-console.log(letters);
+// getLetters(7);
+// console.log(letters);
 
 const PIECES = document.createElement('div');
 PIECES.classList.add('pieces')
@@ -81,3 +80,17 @@ for (let i = 0; i < 7; ++i) {
     piece.classList.add('piece');
     PIECES.appendChild(piece);
 }
+
+PIECES.style.gridTemplateColumns = `repeat(7,1fr)`
+document.body.appendChild(PIECES)
+
+
+// https://www.reddit.com/r/learnjavascript/comments/vo30qx/how_can_i_iterate_over_nested_divs_and_set/
+
+let pieceDivs = document.querySelectorAll('.pieces .piece')
+
+pieceDivs.forEach((piece) => {
+  const content = document.createElement('div')
+  content.append(document.createTextNode(getLetters(1)))
+  piece.appendChild(content)
+});

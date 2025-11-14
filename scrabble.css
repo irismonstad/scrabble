@@ -18,6 +18,20 @@ body {
     background-color: coral;
 }
 
-div {
+.field {
     border:1px solid black;
+}
+
+.pieces {
+    display: grid;
+    border:1px solid red;
+    width:400px;
+    height:50px;
+}
+
+.piece {
+    border:1px solid black;
+    text-align: center;
+    align-content: center;
+    font-size: 2em;
 }
