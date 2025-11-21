@@ -2,10 +2,10 @@
 const BOARD = document.createElement('div');
 BOARD.classList.add('board')
 
-let width = 15;
-let height = 15;
+const WIDTH = 15;
+const HEIGHT = 15;
 
-for (let i = 0; i < width*height; ++i) {
+for (let i = 0; i < WIDTH*HEIGHT; ++i) {
     const field = document.createElement('div');
     field.classList.add('field');
     field.addEventListener("drop", dropHandler);
@@ -13,11 +13,19 @@ for (let i = 0; i < width*height; ++i) {
     BOARD.appendChild(field);
 }
 
-BOARD.style.gridTemplateColumns = `repeat(${width}, 1fr)`;
-BOARD.style.gridTemplateRows = `repeat(${height}, 1fr)`;
+BOARD.style.gridTemplateColumns = `repeat(${WIDTH}, 1fr)`;
+BOARD.style.gridTemplateRows = `repeat(${HEIGHT}, 1fr)`;
 
 document.body.appendChild(BOARD);
 
+let boardArray = [];
+for (let r = 0; r < HEIGHT; ++r) {
+  row = [];
+  for (let c = 0; c < WIDTH; ++c) {
+    row.push(null);
+  }
+  boardArray.push(row);
+}
 // CREATE THE LETTERS
 const LETTER_FREQUENCIES = {
     A: 9,
@@ -113,6 +121,45 @@ function dragoverHandler(ev) {
 
 function dropHandler(ev) {
   ev.preventDefault();
-  const data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
+  const data = ev.dataTransfer.getData("text"); //gets id of piece
+  const piece = document.getElementById(data);
+  // ev.target.appendChild(document.getElementById(data)); //appends piece (found by id) to target  
+
+  let index = -1;
+  let row, col;
+
+  let targetContainer = ev.target;
+  if (targetContainer.classList.contains('piece')) {
+    targetContainer = targetContainer.parentElement;
+  }
+
+  if (targetContainer.classList.contains('field') && targetContainer.querySelector('.piece')) {
+    console.log("Invalid move: Cannot place a piece on top of another piece.");
+    // We stop the function here. No visual or array update.
+    return;
+  }
+
+  targetContainer.appendChild(piece);
+  const letter = piece.textContent;
+  if (targetContainer.classList.contains('field')) {
+    const fields = Array.from(document.querySelectorAll('.board .field'));
+    index = fields.indexOf(targetContainer);
+  }
+
+
+  if (index !== -1) {
+    row = Math.floor(index / WIDTH);
+    col = index % WIDTH;
+  }
+
+  boardArray[row][col] = letter;
+
+  console.log(`Piece ${letter} placed at (${row}, ${col})`);
+  console.log(boardArray); // View the updated array state
 }
+
+// Adding "playing" a word
+// Check if word is positioned validly, play word, check if word valid, give feedback
+
+
+// console.log(boardArray);
