@@ -123,7 +123,6 @@ function dropHandler(ev) {
   ev.preventDefault();
   const data = ev.dataTransfer.getData("text"); //gets id of piece
   const piece = document.getElementById(data);
-  // ev.target.appendChild(document.getElementById(data)); //appends piece (found by id) to target  
 
   let index = -1;
   let row, col;
@@ -135,7 +134,6 @@ function dropHandler(ev) {
 
   if (targetContainer.classList.contains('field') && targetContainer.querySelector('.piece')) {
     console.log("Invalid move: Cannot place a piece on top of another piece.");
-    // We stop the function here. No visual or array update.
     return;
   }
 
@@ -160,6 +158,11 @@ function dropHandler(ev) {
 
 // Adding "playing" a word
 // Check if word is positioned validly, play word, check if word valid, give feedback
+
+const PLAYBUTTON = document.createElement('button');
+PLAYBUTTON.innerText = "PLAY";
+document.body.appendChild(PLAYBUTTON);
+PLAYBUTTON.classList.add('playbutton');
 
 
 // console.log(boardArray);

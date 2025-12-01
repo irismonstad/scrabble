@@ -6,12 +6,15 @@ html, body {
 
 body {
     display: grid;
-    align-items: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    align-content: center;
     justify-items: center;
     background-color: rgb(233, 217, 207);
+    row-gap:2.5em;
 }
 
 .board {
+    order:1;
     width:650px;
     height:650px;
     display: grid;
@@ -23,10 +26,12 @@ body {
 }
 
 .piecearea {
+    order:3;
     display: grid;
     border:1px solid red;
     width:400px;
     height:50px;
+    /* margin-bottom: 4em; */
 }
 
 .pieceareaind {
@@ -42,4 +47,19 @@ body {
     align-content: center;
     font-size: 2em;
     /* position: absolute; */
+}
+
+.playbutton {
+    order:2;
+    border: 1px solid black;
+    background-color: rgb(118, 167, 118);
+    height:50px;
+    width:300px;
+    font-size:xx-large;
+    
+}
+@media screen and (hover:hover) {
+    .playbutton:hover {
+        background-color: rgb(122, 185, 122);
+    }
 }
