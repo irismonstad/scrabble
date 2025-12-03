@@ -6,19 +6,27 @@ html, body {
 
 body {
     display: grid;
+    grid-template-columns: 1fr min-content 1fr;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    align-content: center;
+    /* align-content: center; */
     justify-items: center;
     background-color: rgb(233, 217, 207);
     row-gap:2.5em;
+    padding:20px;
 }
 
 .board {
-    order:1;
-    width:650px;
-    height:650px;
+    /* order:1; */
+    width:550px;
+    height:550px;
     display: grid;
     background-color: coral;
+}
+
+.main_elements {
+    grid-column: 2/3;
+    display:grid;
+    justify-items: center;
 }
 
 .field {
@@ -26,7 +34,7 @@ body {
 }
 
 .piecearea {
-    order:3;
+    /* order:3; */
     display: grid;
     border:1px solid red;
     width:400px;
@@ -50,7 +58,7 @@ body {
 }
 
 .playbutton {
-    order:2;
+    /* order:2; */
     border: 1px solid black;
     background-color: rgb(118, 167, 118);
     height:50px;
@@ -62,4 +70,22 @@ body {
     .playbutton:hover {
         background-color: rgb(122, 185, 122);
     }
+}
+
+.wordsplayed_wrapper {
+    grid-column: 3/4;
+    justify-self: start;
+    align-self: start;
+    padding-left:20px;
+    border:5px solid hotpink;
+    background-color: hotpink;
+}
+
+.wordsplayed_title {
+    margin-top: 0;
+}
+
+.wordsplayed {
+    /* border-collapse: collapse; */
+    border:1px hotpink;
 }

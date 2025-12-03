@@ -1,6 +1,12 @@
+// create main elements div to be able to centre them
+const MAIN_ELEMENTS = document.createElement('div');
+MAIN_ELEMENTS.classList.add('main_elements');
+document.body.appendChild(MAIN_ELEMENTS);
+
 // CREATE BOARD FOR THE GAME (https://github.com/hausnes/webutvikling/blob/main/eksempel/js/piksel-eksperiment/piksels.js)
 const BOARD = document.createElement('div');
-BOARD.classList.add('board')
+BOARD.classList.add('board');
+MAIN_ELEMENTS.appendChild(BOARD);
 
 const WIDTH = 15;
 const HEIGHT = 15;
@@ -16,7 +22,7 @@ for (let i = 0; i < WIDTH*HEIGHT; ++i) {
 BOARD.style.gridTemplateColumns = `repeat(${WIDTH}, 1fr)`;
 BOARD.style.gridTemplateRows = `repeat(${HEIGHT}, 1fr)`;
 
-document.body.appendChild(BOARD);
+// document.body.appendChild(BOARD);
 
 let boardArray = [];
 for (let r = 0; r < HEIGHT; ++r) {
@@ -91,8 +97,8 @@ for (let i = 0; i < 7; ++i) {
 }
 
 PIECEAREA.style.gridTemplateColumns = `repeat(7,1fr)`;
-document.body.appendChild(PIECEAREA);
-
+// document.body.appendChild(PIECEAREA);
+MAIN_ELEMENTS.appendChild(PIECEAREA);
 
 // https://www.reddit.com/r/learnjavascript/comments/vo30qx/how_can_i_iterate_over_nested_divs_and_set/ loosely inspired by
 
@@ -159,10 +165,26 @@ function dropHandler(ev) {
 // Adding "playing" a word
 // Check if word is positioned validly, play word, check if word valid, give feedback
 
+// Create "play"-button
 const PLAYBUTTON = document.createElement('button');
 PLAYBUTTON.innerText = "PLAY";
-document.body.appendChild(PLAYBUTTON);
+// document.body.appendChild(PLAYBUTTON);
 PLAYBUTTON.classList.add('playbutton');
+MAIN_ELEMENTS.appendChild(PLAYBUTTON);
 
 
-// console.log(boardArray);
+//function to play a word
+
+const WORDSPLAYED_WRAPPER = document.createElement('div');
+WORDSPLAYED_WRAPPER.classList.add('wordsplayed-wrapper');
+document.body.appendChild(WORDSPLAYED_WRAPPER);
+
+const WORDSPLAYED_TITLE = document.createElement('h1');
+WORDSPLAYED_TITLE.innerText = "Words played: ";
+WORDSPLAYED_TITLE.classList.add('wordsplayed_title');
+
+WORDSPLAYED_WRAPPER.appendChild(WORDSPLAYED_TITLE);
+
+const WORDSPLAYED = document.createElement('table');
+WORDSPLAYED.classList.add('wordsplayed');
+WORDSPLAYED_WRAPPER.appendChild(WORDSPLAYED);
